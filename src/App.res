@@ -65,6 +65,9 @@ let make = () => {
     <h1> {"Todo List"->React.string} </h1>
     <input value={state.inputValue} type_="text" onChange={handleInput} />
     <button onClick={_ => dispatch(AddTodo)}> {"Add"->React.string} </button>
+    <button onClick={_ => dispatch(ClearTodos)} style={ReactDOM.Style.make()}>
+      {"Clear All"->React.string}
+    </button>
     {state.todoList
     ->Belt.Array.mapWithIndex((i, todo) => {
       <div
