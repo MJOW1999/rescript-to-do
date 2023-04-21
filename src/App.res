@@ -15,7 +15,7 @@ let initialState: state = {
 }
 
 // All possible actions: AddTodo will give us a todo item; InputChanged will expect a string
-type actions = AddTodo | ClearTodos | InputChanged(string)
+type actions = AddTodo | ClearTodos | InputChanged(string) | MarkComplete(int)
 
 let reducer = (state, action) => {
   switch action {
@@ -36,6 +36,19 @@ let reducer = (state, action) => {
       ...state,
       inputValue: newInput,
     }
+  | MarkComplete(index) => {
+      ...state,
+      todoList: state.todoList->Belt.Array.mapWithIndex((i, todo) => {
+        if i == index {
+          {
+            ...todo,
+            isComplete: !todo.isComplete,
+          }
+        } else {
+          todo
+        }
+      }),
+    }
   }
 }
 
@@ -50,14 +63,15 @@ let make = () => {
 
   <div className="App">
     <h1> {"Todo List"->React.string} </h1>
-    {state.inputValue->React.string}
     <input value={state.inputValue} type_="text" onChange={handleInput} />
     <button onClick={_ => dispatch(AddTodo)}> {"Add"->React.string} </button>
     {state.todoList
-    ->Belt.Array.map(todo => {
+    ->Belt.Array.mapWithIndex((i, todo) => {
       <div
+        onClick={_ => i->MarkComplete->dispatch}
         style={ReactDOM.Style.make(
-          ~background="mintcream",
+          ~background={todo.isComplete ? "limegreen" : "blue"},
+          ~textDecoration={todo.isComplete ? "line-through" : "initial"},
           ~padding="1rem",
           ~margin="1rem 0",
           ~fontSize="1.5rem",

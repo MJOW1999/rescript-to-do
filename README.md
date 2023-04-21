@@ -71,3 +71,26 @@ We use [Belt](https://rescript-lang.org/docs/manual/latest/api/belt) to make thi
     })
     -> React.array}
 ```
+### isComplete Functionality
+
+We need to check that an item on the todo list is complete or not.
+
+The index needs to be checked as well as a new action to be created.
+
+This was done with `MarkComplete`, which is essentially a toggle for the user to switch if it is complete or not.
+
+```rescript
+MarkComplete(index) => {
+      ...state,
+      todoList: state.todoList->Belt.Array.mapWithIndex((i, todo) => {
+        if i == index {
+          {
+            ...todo,
+            isComplete: !todo.isComplete,
+          }
+        } else {
+          todo
+        }
+      }),
+    }
+```
