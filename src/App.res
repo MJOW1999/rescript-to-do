@@ -63,17 +63,34 @@ let make = () => {
 
   <div className="App">
     <h1> {"Todo List"->React.string} </h1>
-    <input value={state.inputValue} type_="text" onChange={handleInput} />
-    <button onClick={_ => dispatch(AddTodo)}> {"Add"->React.string} </button>
-    <button onClick={_ => dispatch(ClearTodos)} style={ReactDOM.Style.make()}>
-      {"Clear All"->React.string}
-    </button>
+    <article
+      style={ReactDOM.Style.make(
+        ~display="inline-flex",
+        ~flexDirection="column",
+        ~gridGap="0.5em",
+        ~width="max-content",
+        (),
+      )}>
+      <label htmlFor="Add Todo"> {"Add Todo:"->React.string} </label>
+      <input
+        name="Add todo"
+        label="Add todo"
+        value={state.inputValue}
+        type_="text"
+        onChange={handleInput}
+        style={ReactDOM.Style.make(~borderRadius="2px", ())}
+      />
+      <button name="" onClick={_ => dispatch(AddTodo)}> {"Add"->React.string} </button>
+      <button onClick={_ => dispatch(ClearTodos)} style={ReactDOM.Style.make()}>
+        {"Clear All"->React.string}
+      </button>
+    </article>
     {state.todoList
     ->Belt.Array.mapWithIndex((i, todo) => {
       <div
         onClick={_ => i->MarkComplete->dispatch}
         style={ReactDOM.Style.make(
-          ~background={todo.isComplete ? "limegreen" : "blue"},
+          ~background={todo.isComplete ? "limegreen" : "cornflowerblue"},
           ~textDecoration={todo.isComplete ? "line-through" : "initial"},
           ~padding="1rem",
           ~margin="1rem 0",
