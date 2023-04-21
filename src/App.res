@@ -55,7 +55,16 @@ let make = () => {
     <button onClick={_ => dispatch(AddTodo)}> {"Add"->React.string} </button>
     {state.todoList
     ->Belt.Array.map(todo => {
-      <div> {todo.title->React.string} </div>
+      <div
+        style={ReactDOM.Style.make(
+          ~background="mintcream",
+          ~padding="1rem",
+          ~margin="1rem 0",
+          ~fontSize="1.5rem",
+          (),
+        )}>
+        {todo.title->React.string}
+      </div>
     })
     ->React.array}
   </div>
