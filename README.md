@@ -59,3 +59,15 @@ dispatch(InputChanged(newInput))
 ```rescript
     newInput->InputChanged->dispatch
 ```
+
+When displaying the todo list we have to map through the array items and then convert it into a React array.
+We use [Belt](https://rescript-lang.org/docs/manual/latest/api/belt) to make this immutable
+
+```rescript
+{state.todoList -> Belt.Array.map((todo) => {
+      <div>
+        {todo.title->React.string}
+      </div>
+    })
+    -> React.array}
+```

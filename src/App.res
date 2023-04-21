@@ -3,7 +3,7 @@
 
 type todo = {
   title: string,
-  description: string,
+  isComplete: bool,
 }
 
 // state has a list of todos and an inputValue, which serves as the user input
@@ -15,13 +15,18 @@ let initialState: state = {
 }
 
 // All possible actions: AddTodo will give us a todo item; InputChanged will expect a string
-type actions = AddTodo(todo) | ClearTodos | InputChanged(string)
+type actions = AddTodo | ClearTodos | InputChanged(string)
 
 let reducer = (state, action) => {
   switch action {
-  | AddTodo(todo) => {
+  | AddTodo => {
       inputValue: "",
-      todoList: state.todoList->Js.Array2.concat([todo]),
+      todoList: state.todoList->Js.Array2.concat([
+        {
+          title: state.inputValue,
+          isComplete: false,
+        },
+      ]),
     }
   | ClearTodos => {
       ...state,
@@ -47,5 +52,11 @@ let make = () => {
     <h1> {"Todo List"->React.string} </h1>
     {state.inputValue->React.string}
     <input value={state.inputValue} type_="text" onChange={handleInput} />
+    <button onClick={_ => dispatch(AddTodo)}> {"Add"->React.string} </button>
+    {state.todoList
+    ->Belt.Array.map(todo => {
+      <div> {todo.title->React.string} </div>
+    })
+    ->React.array}
   </div>
 }
