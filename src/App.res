@@ -36,5 +36,16 @@ let reducer = (state, action) => {
 
 @react.component
 let make = () => {
-  <div className="App"> <h1> {"Hello World"->React.string} </h1> </div>
+  let (state, dispatch) = React.useReducer(reducer, initialState)
+
+  let handleInput = e => {
+    let newInput = ReactEvent.Form.target(e)["value"]
+    newInput->InputChanged->dispatch
+  }
+
+  <div className="App">
+    <h1> {"Todo List"->React.string} </h1>
+    {state.inputValue->React.string}
+    <input value={state.inputValue} type_="text" onChange={handleInput} />
+  </div>
 }
