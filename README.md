@@ -1,4 +1,30 @@
-# rescript-to-do
+# Rescript To Do List
+
+> Simple To Do List created with ReScript
+
+## Table of contents
+
+- [Technologies](#technologies)
+- [Inspiration](#inspiration)
+- [Process](#process)
+    - [Installation](#installation)
+    - [Reducers](#reducers)
+    - [Display Content](#display-content)
+    - [isComplete](#iscomplete-functionality)
+- [Features](#features)
+- [Status](#status)
+- [Contact](#contact)
+
+## Technologies
+
+- HTML5
+- CSS
+- ReScript
+- React
+
+## Inspiration
+
+Wanted to create an application to show off some of my recent learnings of ReScript
 
 ## Process
 
@@ -71,6 +97,7 @@ We use [Belt](https://rescript-lang.org/docs/manual/latest/api/belt) to make thi
     })
     -> React.array}
 ```
+
 ### isComplete Functionality
 
 We need to check that an item on the todo list is complete or not.
@@ -94,3 +121,25 @@ MarkComplete(index) => {
       }),
     }
 ```
+
+## Features
+
+The user can:
+- Add things to their to do list
+- Toggle whether or not something is completed
+- Clear the to do list
+
+## Status
+
+Project is: _completed_
+
+## Contact
+
+Created by [@MJOW1999](https://github.com/MJOW1999)
+
+Feel free to contact me:
+
+- Email: michael.jow.williams@gmail.com
+- LinkedIn: [Michael Williams](https://www.linkedin.com/in/michael-williams-17a9b81a0)
+
+Also follow my Twitter: [@michWills99](https://twitter.com/michWills99)
